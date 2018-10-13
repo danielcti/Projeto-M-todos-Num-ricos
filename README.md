@@ -1,2 +1,2 @@
-# Projeto-M-todos-Num-ricos
-Implementação dos principais métodos numéricos
+# Projeto-Metodos-Numericos
+Implementacao dos principais metodos numericos feitos por mim
