@@ -26,6 +26,9 @@ $ python3 metodos.py < input.txt
 
 O arquivo txt que será lido tem que iniciar com 1, caso se deseje plotar os gráficos, ou 0, caso contrário.<br />
 A próxima linha contém um /// para indicar que o programa iniciará.<br />
+As próximas linhas serão os métodos desejados com seus respectivos parâmetros.<br />
+E para indicar que as entradas acabaram deve ter um /// na ultima linha.
+<br /> <br />
 Nos métodos de Euler, Euler Inverso, Euler Aprimorado e Runge Kutta as linhas serão assim:
 
 ```
@@ -41,50 +44,12 @@ E nos métodos Adams Bashforth, Adams Multon e Formula de Diferenciação Invers
 ```
 nome_do_metodo (grau-1 valores de y) t0 h(o tamanho do passo) n(número de iterações) (dF(y,t)/dt) grau
 ```
-Explain what these tests test and why
-
+## Exemplo do arquivo de entrada
 ```
-Give an example
+1
+///
+euler 0 0 0.1 20 1-t+4*y
+adam_bashforth 0.0 0.1 0.23 0.402 0.6328 0 0.1 20 1-t+4*y 6
+adam_bashforth_by_runge_kutta 0 0 0.1 20 1-t+4*y 6
+///
 ```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
