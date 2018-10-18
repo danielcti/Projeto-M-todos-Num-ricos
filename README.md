@@ -30,7 +30,7 @@ Caso não seja necessário plotar os gráficos não precisa escrever nada. <br /
 As próximas linhas serão os métodos desejados com seus respectivos parâmetros.<br />
 E para indicar que as entradas acabaram deve ter um /// na ultima linha.
 <br />
-###Escolhendo o Método que será utilizado
+### Escolhendo o Método que será utilizado
 Nos métodos de Euler, Euler Inverso, Euler Aprimorado e Runge Kutta as linhas serão assim:
 
 ```
