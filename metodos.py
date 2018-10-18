@@ -1,17 +1,25 @@
 from sympy import *
-from Init import *
 import matplotlib.pyplot as plt
 
 #global variables
 y, t = symbols('y t') # 
 v_Aux = [] # list that store the points by AB, AM and IF
 text_file = open("output.txt", "w") # file that stores all outputs
+vx = []
+vy = []
 
 def f_calculate(f,yn,tn): #calculates the yn and tn applied in function f
 	f = f.subs('t',tn)
 	f = f.subs('y',yn)
 	return f
 
+def plot(vx, vy, metodo): #plot function
+	plt.xlabel("t")
+	plt.ylabel("y")
+	plt.title(metodo)
+	plt.plot(vx, vy, 'go')
+	plt.plot(vx, vy, 'k:', color='blue')
+	plt.show()
 #######
 #single methods
 def euler(f,t,y,h,n):
@@ -22,12 +30,16 @@ def euler(f,t,y,h,n):
 	text_file.write("y(%.5f) = %.8f\n" % (float(tn), float(yn)))
 	text_file.write("h = %.5f\n" % (float(h)))
 	text_file.write("0 %.5f\n" % (float(yn)))
-
+	vx.append(t) # append a t point to plot later
+	vy.append(y) # append a y point to plot later
 	for x in range(1,n+1):
 		yn = yn + h*f_calculate(f,yn,tn) # formula tradicional do metodo de euler
 		tn = tn + h # incrementa o tn para a proxima iteracao
+		vx.append(tn)
+		vy.append(yn)
 		text_file.write("%d %.8f\n" % (int(x), float(yn)))
 	text_file.write("\n")
+	plot(vx, vy,'Euler')
 	return 
 
 def euler_inverso(f,t,y,h,n):
@@ -38,14 +50,17 @@ def euler_inverso(f,t,y,h,n):
 	text_file.write("y(%.5f) = %.8f\n" % (float(tn), float(yn)))
 	text_file.write("h = %.5f\n" % (float(h)))
 	text_file.write("0 %.5f\n" % (float(yn)))
-
+	vx.append(t)
+	vy.append(y)
 	for x in range(1,n+1):
 		k = yn + h*f_calculate(f,yn,tn)
-
 		yn = yn + h*f_calculate(f, k, tn+h) # formula tradicional do metodo de euler
 		tn = tn + h # incrementa o tn para a proxima iteracao
+		vx.append(tn)
+		vy.append(yn)
 		text_file.write("%d %.8f\n" % (int(x), float(yn)))
 	text_file.write("\n")
+	plot(vx,vy,'Euler Inverso')
 	return
 
 def euler_aprimorado(f,t,y,h,n):
@@ -56,13 +71,17 @@ def euler_aprimorado(f,t,y,h,n):
 	text_file.write("y(%.5f) = %.8f\n" % (float(tn), float(yn)))
 	text_file.write("h = %.5f\n" % (float(h)))
 	text_file.write("0 %.5f\n" % (float(yn)))
-
+	vx.append(t)
+	vy.append(y)
 	for x in range(1,n+1):
 		k = yn + h*f_calculate(f,yn,tn)
 		yn = yn + h/2*(f_calculate(f, yn, tn)+f_calculate(f, k, tn+h)) # formula tradicional do metodo de euler
 		tn = tn + h # incrementa o tn para a proxima iteracao
+		vx.append(tn)
+		vy.append(yn)
 		text_file.write("%d %.8f\n" % (int(x), float(yn)))
 	text_file.write("\n")
+	plot(vx,vy,'Euler Aprimorado')
 	return
 
 def runge_kutta(f,t,y,h,n):
@@ -73,7 +92,8 @@ def runge_kutta(f,t,y,h,n):
 	text_file.write("y(%.5f) = %.8f\n" % (float(tn), float(yn)))
 	text_file.write("h = %.5f\n" % (float(h)))
 	text_file.write("0 %.5f\n" % (float(yn)))
-
+	vx.append(t)
+	vy.append(y)
 	for x in range(1,n+1):
 		k1 = f_calculate(f, yn, tn)
 		k2 = f_calculate(f, yn+(h/2*k1), tn+(h/2))
@@ -81,20 +101,23 @@ def runge_kutta(f,t,y,h,n):
 		k4 = f_calculate(f, yn+(h*k3), tn+h)
 		yn = yn + h/6*(k1+2*k2+2*k3+k4) # formula tradicional do metodo de euler
 		tn = tn + h # incrementa o tn para a proxima iteracao
+		vx.append(tn)
+		vy.append(yn)
 		text_file.write("%d %.8f\n" % (int(x), float(yn)))
 	text_file.write("\n")
+	plot(vx,vy,'Runge Kutta')
 	return
 #######
 # auxiliar methods
 def aux_euler(expr, t0, y0, h, n):
-    t = t0
-    y = y0
-    v_Aux.append([y,t])
-    for i in range(0, n):
-	    y = y + (h*f_calculate(expr,y,t)) # formula tradicional do metodo de euler
-	    t = t + h
-	    v_Aux.append([y,t])
-    return
+	t = t0
+	y = y0
+	v_Aux.append([y,t])
+	for i in range(0, n):
+		y = y + (h*f_calculate(expr,y,t)) # formula tradicional do metodo de euler
+		t = t + h
+		v_Aux.append([y,t])
+	return
 
 def aux_euler_inverso(expr,t0 ,y0 ,h, n):
 	t = t0 # o primeiro valor para o tn sera o t0
@@ -136,6 +159,9 @@ def aux_runge_kutta(expre,t0,y0,h,n):
 def printInitialPoints(grau):
     for i in range(0,grau):
         y=v_Aux[i][0]
+        t=v_Aux[i][1]
+        vx.append(t)
+        vy.append(y)
         text_file.write("%d %.5f\n" % (int(i), float(y)))
     return
 
@@ -164,9 +190,13 @@ def Adams__Bash(metodo, expre, y0, t0, h, n, grau):
 	for i in range(grau-1, n):
 		yf += AdamBashF(expre, h, grau, i)
 		tf += h
+		vx.append(tf)
+		vy.append(yf)	
 		v_Aux.append((yf, tf))
 		text_file.write("%d %.5f\n" % (int(i+1), float(yf)))
 	text_file.write('\n')
+	plot(vx,vy,metodo)
+	return
 
 def Adams__Multon(metodo, expre, y0, t0, h, n, grau):
 	if(metodo == 'adam_multon_by_euler'):
@@ -192,9 +222,12 @@ def Adams__Multon(metodo, expre, y0, t0, h, n, grau):
 	for i in range(grau-2, n):
 		yf = FAdamsMoulton(yf, expre, h, grau, i)
 		v_Aux.append((yf, tf))
+		vx.append(tf)
+		vy.append(yf)
 		text_file.write("%d %.5f\n" % (int(i+1), float(yf)))
 		tf += h
 	text_file.write('\n')
+	plot(vx,vy,metodo)
 	return
 
 def FInversa(metodo, expre, y0, t0, h, n, grau):
@@ -220,10 +253,13 @@ def FInversa(metodo, expre, y0, t0, h, n, grau):
 	yf = v_Aux[grau-1][0]
 	for i in range(grau-1, n):
 		yf = FInversaF(yf, expre, h, grau, i)
-		v_Aux.append((yf, tf))
-		text_file.write("%d %.5f\n" % (int(i+1), float(yf)))
 		tf += h
+		v_Aux.append((yf, tf))
+		vx.append(tf)
+		vy.append(yf)
+		text_file.write("%d %.5f\n" % (int(i+1), float(yf)))
 	text_file.write('\n')
+	plot(vx,vy,metodo)
 	return
 
 def AdamBashF(expre, h, g, i):
@@ -529,7 +565,7 @@ def init(entradas):# function that chooses which method will be called
 		n = int(entradas[4])
 		grau = int(entradas[6])
 		tf = (t0 + (h*n))
-
+		FInversa(entradas[0], expr, y0, t0, h, n, grau)
 
 def main():
 	start = False
@@ -541,9 +577,11 @@ def main():
 			break
 		if(entrada == '///'): # now if reads a '///' break the while True
 			start = True
-		entradas = entrada.split() # slits all 'words' of entrada in an index of entradas
+		entradas = entrada.split() # splits all 'words' of entrada in an index of entradas
 		init(entradas) # function that chooses which method will be called
 		del v_Aux[:] # clears v_Aux list to use in the next iteration
+		del vx[:]
+		del vy[:]
 	text_file.write('///')
 
 if __name__ == "__main__":
