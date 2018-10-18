@@ -7,6 +7,7 @@ v_Aux = [] # list that store the points by AB, AM and IF
 text_file = open("output.txt", "w") # file that stores all outputs
 vx = []
 vy = []
+plotar = True
 
 def f_calculate(f,yn,tn): #calculates the yn and tn applied in function f
 	f = f.subs('t',tn)
@@ -14,12 +15,14 @@ def f_calculate(f,yn,tn): #calculates the yn and tn applied in function f
 	return f
 
 def plot(vx, vy, metodo): #plot function
-	plt.xlabel("t")
-	plt.ylabel("y")
-	plt.title(metodo)
-	plt.plot(vx, vy, 'go')
-	plt.plot(vx, vy, 'k:', color='blue')
-	plt.show()
+	global plotar
+	if(plotar):
+		plt.xlabel("t")
+		plt.ylabel("y")
+		plt.title(metodo)
+		plt.plot(vx, vy, 'go')
+		plt.plot(vx, vy, 'k:', color='blue')
+		plt.show()
 #######
 #single methods
 def euler(f,t,y,h,n):
@@ -570,12 +573,16 @@ def init(entradas):# function that chooses which method will be called
 def main():
 	start = False
 	entrada = ''
-
+	global plotar
+	if(input() == '1'):
+		plotar == True
+	else:
+		plotar == False
 	while(True):
 		entrada = input() # reads user input
 		if(entrada == '///' and start == True): # ignore the first '///'
 			break
-		if(entrada == '///'): # now if reads a '///' break the while True
+		else:
 			start = True
 		entradas = entrada.split() # splits all 'words' of entrada in an index of entradas
 		init(entradas) # function that chooses which method will be called

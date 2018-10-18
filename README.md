@@ -8,35 +8,29 @@ Essas instruções irão ajudar em como compilar e executar o código presente n
 
 ### Pré-requisitos
 
-Para rodar este programa você deve estar em um ambiente Linux e com a biblioteca Simpy e MatplotLib instaladas em sua máquina. Caso você não tenha utilize os comandos abaixo.
+Para rodar este programa você deve estar em um ambiente Linux e com a biblioteca Simpy e MatplotLib instaladas em sua máquina. Caso você não tenha entre nos links abaixo.
 ```
-[a link] https://docs.sympy.org/latest/install.html#installation
+https://docs.sympy.org/latest/install.html#installation
 https://matplotlib.org/users/installing.html
 
 ```
 
-### Installing
+### Executando o código
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
+Assim, quando quiser executá-lo, com todas as dependências devidamente instaladas, você deve rodar o comando abaixo, na qual input.txt é um arquivo texto com as entradas desejadas.
 ```
-Give the example
+$ python3 metodos.py < input.txt
 ```
 
-And repeat
+## Como o programa funciona
+
+O arquivo txt que será lido tem que iniciar com 1, caso se deseje plotar os gráficos, ou 0, caso contrário.
+A próxima linha contém um /// para indicar que o programa iniciará.
+Com exceção dos Métodos Adams Bashforth, Adams Multon e Formula de Diferenciação Inversa as linhas serão da seguinte forma:
 
 ```
-until finished
+nome_do_metodo t0 Y(t0) h(o tamanho do passo) n(numero de iterações) dF(y,t)/dt(a própria função)
 ```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
 ### Break down into end to end tests
 
 Explain what these tests test and why
