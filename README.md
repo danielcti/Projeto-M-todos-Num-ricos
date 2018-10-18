@@ -46,7 +46,7 @@ nome_do_metodo (grau-1 valores de y) t0 h(o tamanho do passo) n(número de itera
 ```
 ### Exemplo do arquivo de entrada
 ```
-1
+plot
 euler 0 0 0.1 20 1-t+4*y
 adam_bashforth 0.0 0.1 0.23 0.402 0.6328 0 0.1 20 1-t+4*y 6
 adam_bashforth_by_runge_kutta 0 0 0.1 20 1-t+4*y 6
