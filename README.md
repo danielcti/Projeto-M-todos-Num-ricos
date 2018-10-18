@@ -1,6 +1,6 @@
 # Projeto de Metodos Numericos - IF816EC
 
-Todas as aplicações dos Métodos Numéricos feitos por Daniel Cavalcanti (dpc2@cin.ufpe.br) utilizando Python
+Todas as aplicações dos Métodos Numéricos feitos por Daniel Cavalcanti (dpc2@cin.ufpe.br) utilizando Python.
 
 ## Informações Gerais
 
@@ -24,12 +24,13 @@ $ python3 metodos.py < input.txt
 
 ## Como o programa funciona
 
-Caso deseje-se plotar os gráficos o arquivo de entrada se iniciará com a palavra plot, nesse caso para cada gráfico que for gerado é necessário fechar ele para continuar a execução do programa.
+Caso se queira plotar os gráficos o arquivo de entrada se iniciará com a palavra plot, nesse caso para cada gráfico que for gerado é necessário fechar ele para continuar a execução do programa.
 <br />
-Caso não seja necessário plotar os gráficos não precisa escrever nada. <br />
+Caso não seja necessário plotar os gráficos escreva a letra n na primeira linha. <br />
 As próximas linhas serão os métodos desejados com seus respectivos parâmetros.<br />
 E para indicar que as entradas acabaram deve ter um /// na ultima linha.
-<br />
+
+
 ### Escolhendo o Método que será utilizado
 Nos métodos de Euler, Euler Inverso, Euler Aprimorado e Runge Kutta as linhas serão assim:
 
