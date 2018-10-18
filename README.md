@@ -10,7 +10,7 @@ Essas instruções irão ajudar em como compilar e executar o código presente n
 
 Para rodar este programa você deve estar em um ambiente Linux e com a biblioteca Simpy e MatplotLib instaladas em sua máquina. Caso você não tenha utilize os comandos abaixo.
 ```
-https://docs.sympy.org/latest/install.html#installation
+[a link] https://docs.sympy.org/latest/install.html#installation
 https://matplotlib.org/users/installing.html
 
 ```
