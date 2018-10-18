@@ -24,15 +24,23 @@ $ python3 metodos.py < input.txt
 
 ## Como o programa funciona
 
-O arquivo txt que será lido tem que iniciar com 1, caso se deseje plotar os gráficos, ou 0, caso contrário.
-A próxima linha contém um /// para indicar que o programa iniciará.
-Com exceção dos Métodos Adams Bashforth, Adams Multon e Formula de Diferenciação Inversa as linhas serão da seguinte forma:
+O arquivo txt que será lido tem que iniciar com 1, caso se deseje plotar os gráficos, ou 0, caso contrário.<br />
+A próxima linha contém um /// para indicar que o programa iniciará.<br />
+Nos métodos de Euler, Euler Inverso, Euler Aprimorado e Runge Kutta as linhas serão assim:
 
 ```
-nome_do_metodo t0 Y(t0) h(o tamanho do passo) n(numero de iterações) dF(y,t)/dt(a própria função)
+nome_do_metodo t0 Y(t0) h(o tamanho do passo) n(número de iterações) (dF(y,t)/dt)
 ```
-### Break down into end to end tests
+Nos métodos Adams Bashforth, Adams Multon e Formula de Diferenciação Inversa obtendo os valores iniciais por métodos anteriores as linhas serao assim:
 
+```
+nome_do_metodo t0 Y(t0) h(o tamanho do passo) n(número de iterações) (dF(y,t)/dt) grau
+```
+E nos métodos Adams Bashforth, Adams Multon e Formula de Diferenciação Inversa por lista de valores iniciais as linhas serão assim:
+
+```
+nome_do_metodo (grau-1 valores de y) t0 h(o tamanho do passo) n(número de iterações) (dF(y,t)/dt) grau
+```
 Explain what these tests test and why
 
 ```
