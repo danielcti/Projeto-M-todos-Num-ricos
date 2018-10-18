@@ -27,7 +27,7 @@ $ python3 metodos.py < input.txt
 Caso se queira plotar os gráficos o arquivo de entrada se iniciará com a palavra plot, nesse caso para cada gráfico que for gerado é necessário fechar ele para continuar a execução do programa.
 <br />
 Caso não seja necessário plotar os gráficos escreva a letra n na primeira linha. <br />
-As próximas linhas serão os métodos desejados com seus respectivos parâmetros. Lembrando que precisa estar em função de 'y' e 't' e estar nos padrões da Sympy. ```ex: 1-t+4**y```<br />
+As próximas linhas serão os métodos desejados com seus respectivos parâmetros. Lembrando que precisa estar em função de 'y' e 't' e estar nos padrões da Sympy. ```ex: 1-t+4*y```<br />
 E para indicar que as entradas acabaram deve ter um /// na ultima linha.
 
 
