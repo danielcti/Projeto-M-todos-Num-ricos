@@ -25,10 +25,12 @@ $ python3 metodos.py < input.txt
 ## Como o programa funciona
 
 Caso deseje-se plotar os gráficos o arquivo de entrada se iniciará com a palavra plot, nesse caso para cada gráfico que for gerado é necessário fechar ele para continuar a execução do programa.
+<br />
 Caso não seja necessário plotar os gráficos não precisa escrever nada. <br />
 As próximas linhas serão os métodos desejados com seus respectivos parâmetros.<br />
 E para indicar que as entradas acabaram deve ter um /// na ultima linha.
-<br /> <br />
+<br />
+####Escolhendo o Método que será utilizado
 Nos métodos de Euler, Euler Inverso, Euler Aprimorado e Runge Kutta as linhas serão assim:
 
 ```
