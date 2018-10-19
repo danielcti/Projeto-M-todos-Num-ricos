@@ -1,10 +1,10 @@
 from sympy import *
 import matplotlib.pyplot as plt
 
-#global variables
-y, t = symbols('y t') # 
-v_Aux = [] # list that store the points by AB, AM and IF
-text_file = open("output.txt", "w") # file that stores all outputs
+# variaveis globais
+y, t = symbols('y t') # simbolos interpretados pelo sympy
+v_Aux = [] # lista que armazena os valores calculados nos metodos de passos multiplos
+text_file = open("output.txt", "w") # arquivo que armazena as saidas
 vx = []
 vy = []
 count = 0 
@@ -27,8 +27,7 @@ def plot(vx, vy, metodo): #plot function
 		plt.plot(vx, vy, 'go')
 		plt.plot(vx, vy, 'k:', color='blue')
 		plt.show()
-#######
-#single methods
+# metodo individual
 def euler(f,y0,t0,h,n):
 	tn = t0 # o primeiro valor para o tn sera o t0
 	yn = y0 # o primeiro valor para o yn sera o y0
@@ -37,18 +36,18 @@ def euler(f,y0,t0,h,n):
 	text_file.write("y(%.5f) = %.8f\n" % (float(tn), float(yn)))
 	text_file.write("h = %.5f\n" % (float(h)))
 	text_file.write("0 %.5f\n" % (float(yn)))
-	vx.append(tn) # append a t point to plot later
-	vy.append(yn) # append a y point to plot later
+	vy.append(yn) # acrescenta o yn para plotar mais tarde
+	vx.append(tn) # acrescenta o tn para plotar mais tarde
 	for x in range(1,n+1):
-		yn = yn + h*f_calculate(f,yn,tn) # formula tradicional do metodo de euler
-		tn = tn + h # incrementa o tn para a proxima iteracao
+		yn = yn + h*f_calculate(f,yn,tn) 
+		tn = tn + h 
 		vx.append(tn)
 		vy.append(yn)
 		text_file.write("%d %.8f\n" % (int(x), float(yn)))
 	text_file.write("\n")
 	plot(vx, vy,'Euler')
 	return 
-
+# metodo individual
 def euler_inverso(f,y0,t0,h,n):
 	tn = t0
 	yn = y0
@@ -69,7 +68,7 @@ def euler_inverso(f,y0,t0,h,n):
 	text_file.write("\n")
 	plot(vx,vy,'Euler Inverso')
 	return
-
+# metodo individual
 def euler_aprimorado(f,y0,t0,h,n):
 	tn = t0
 	yn = y0
@@ -90,7 +89,7 @@ def euler_aprimorado(f,y0,t0,h,n):
 	text_file.write("\n")
 	plot(vx,vy,'Euler Aprimorado')
 	return
-
+# metodo individual
 def runge_kutta(f,y0,t0,h,n):
 	tn = t0
 	yn = y0
@@ -114,8 +113,7 @@ def runge_kutta(f,y0,t0,h,n):
 	text_file.write("\n")
 	plot(vx,vy,'Runge Kutta')
 	return
-#######
-# auxiliar methods
+# metodo auxiliar
 def aux_euler(f, y0, t0, h, n):
 	t = t0
 	y = y0
@@ -136,7 +134,7 @@ def aux_euler_inverso(f, y0 ,t0 ,h, n):
 		t = t + h 
 		v_Aux.append([y,t])
 	return
-
+# metodo auxiliar
 def aux_euler_aprimorado(f, y0, t0, h, n):
     t = t0
     y = y0
@@ -147,7 +145,7 @@ def aux_euler_aprimorado(f, y0, t0, h, n):
 	    t = t + h 
 	    v_Aux.append([y,t])
     return
-
+# metodo auxiliar
 def aux_runge_kutta(f, y0, t0, h, n):
     y=y0
     t=t0
@@ -161,7 +159,7 @@ def aux_runge_kutta(f, y0, t0, h, n):
 	    t += h
 	    v_Aux.append([y,t])
     return
-#######
+
 def printInitialPoints(grau):
     for i in range(0,grau):
         y=v_Aux[i][0]
@@ -189,8 +187,8 @@ def Adams__Bash(metodo, f, y0, t0, h, n, grau):
 
 	text_file.write('y(%.2f) = %.5f\n' % (float(t0),float(y0)))
 	text_file.write('h = %.2f\n' % float(h))
-	printInitialPoints(grau)
-	
+	# imprime os valores calculados por outro metodo ou dado inicialmente pelo usuario
+	printInitialPoints(grau) 
 	tf = t0 + (grau-1)*h
 	yf = v_Aux[grau-1][0]
 	for i in range(grau-1, n):
@@ -291,6 +289,23 @@ def AdamBashF(f, h, g, i):
 		fn5 = f_calculate(f, v_Aux[i-4][0], v_Aux[i-4][1])
 		fn6 = f_calculate(f, v_Aux[i-5][0], v_Aux[i-5][1])
 		res = (h/1440)*(4277*fn1 - 7923*fn2 + 9982*fn3 - 7298*fn4 + 2877*fn5 - 475*fn6)
+	elif(g == 7):
+		fn3 = f_calculate(f, v_Aux[i-2][0], v_Aux[i-2][1])
+		fn4 = f_calculate(f, v_Aux[i-3][0], v_Aux[i-3][1])
+		fn5 = f_calculate(f, v_Aux[i-4][0], v_Aux[i-4][1])
+		fn6 = f_calculate(f, v_Aux[i-5][0], v_Aux[i-5][1])
+		fn7 = f_calculate(f, v_Aux[i-6][0], v_Aux[i-6][1])
+		res = (h/60480)*(198721*fn1 - 447288*fn2 + 705549*fn3 - 688256*fn4 + 407139*fn5 \
+		- 134472*fn6 + 19087*fn7) # \ diz que a linha continua na proxima
+	elif(g == 8):
+		fn3 = f_calculate(f, v_Aux[i-2][0], v_Aux[i-2][1])
+		fn4 = f_calculate(f, v_Aux[i-3][0], v_Aux[i-3][1])
+		fn5 = f_calculate(f, v_Aux[i-4][0], v_Aux[i-4][1])
+		fn6 = f_calculate(f, v_Aux[i-5][0], v_Aux[i-5][1])
+		fn7 = f_calculate(f, v_Aux[i-6][0], v_Aux[i-6][1])
+		fn8 = f_calculate(f, v_Aux[i-7][0], v_Aux[i-7][1])	
+		res = (h/120960)*(434241*fn1 - 1152169*fn2 + 2183877*fn3 - 2664477*fn4 \
+		+ 2102243*fn5 - 1041723*fn6 + 295767*fn7 - 36799*fn8)
 	return res
 
 def AdamMultonF(yf, f, h, g, i):
@@ -332,8 +347,8 @@ def AdamMultonF(yf, f, h, g, i):
 		fn8 = f_calculate(f, v_Aux[i-6][0], v_Aux[i-6][1])
 		aux = yf + (h/120960)*(36799*fn1+139849*fn2-121797*fn3+123133*fn4 \
 			  -88547*fn5+41499*fn6-11351*fn7+1375*fn8) # \ diz que a linha ainda nao acabou
-	res = solve(Eq(aux, y), y) # solve the equation
-	return res[0]
+	res = solve(Eq(aux, y), y) # soluciona a equacao
+	return res[0] # como res eh uma lista de um valor so retornamos este
 
 def FInversaF(yf, f, h, g, i):
 	fn1 = f_calculate(f, y, v_Aux[i][1]+h)
@@ -361,7 +376,7 @@ def FInversaF(yf, f, h, g, i):
 	res = solve(Eq(aux, y), y) # solve the equation
 	return res[0]
 
-def init(entradas):# function that chooses which method will be called
+def init(entradas):# funcao que escolhe qual metodo sera chamado
 	adam_b = ['adam_bashforth_by_euler',
 	          'adam_bashforth_by_euler_aprimorado',
 	          'adam_bashforth_by_euler_inverso',
@@ -562,16 +577,16 @@ def init(entradas):# function that chooses which method will be called
 def main():
 	global plotar
 	entrada = ''
-	if(input() == 'plot'): # will plot the graphs
+	if(input() == 'plot'): # usuario quis plotar os graficos
 		plotar = True
 	
 	while(True):
-		entrada = input() # reads user input
-		if(entrada == '///'): # end of program
+		entrada = input() # le a entrada do usuario
+		if(entrada == '///'): # fim de programa
 			break
-		entradas = entrada.split() # splits all 'words' of entrada in an index of entradas
-		init(entradas) # function that chooses which method will be called
-		del v_Aux[:] # clears v_Aux list to use in the next iteration
+		entradas = entrada.split() # separa cada 'palavra' de entrada em um indice da lista entradas
+		init(entradas) # principal funcao do codigo, responsavel por saber qual metodo sera chamado
+		del v_Aux[:] # limpa essas 3 listas para nao prejudicar a proxima iteracao
 		del vx[:]
 		del vy[:]
 	text_file.write('///')
