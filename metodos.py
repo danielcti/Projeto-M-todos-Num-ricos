@@ -29,7 +29,7 @@ def plot(vx, vy, metodo): #plot function
 		plt.show()
 #######
 #single methods
-def euler(f,t0,y0,h,n):
+def euler(f,y0,t0,h,n):
 	tn = t0 # o primeiro valor para o tn sera o t0
 	yn = y0 # o primeiro valor para o yn sera o y0
 
@@ -49,7 +49,7 @@ def euler(f,t0,y0,h,n):
 	plot(vx, vy,'Euler')
 	return 
 
-def euler_inverso(f,t0,y0,h,n):
+def euler_inverso(f,y0,t0,h,n):
 	tn = t0
 	yn = y0
 
@@ -70,7 +70,7 @@ def euler_inverso(f,t0,y0,h,n):
 	plot(vx,vy,'Euler Inverso')
 	return
 
-def euler_aprimorado(f,t0,y0,h,n):
+def euler_aprimorado(f,y0,t0,h,n):
 	tn = t0
 	yn = y0
 
@@ -91,7 +91,7 @@ def euler_aprimorado(f,t0,y0,h,n):
 	plot(vx,vy,'Euler Aprimorado')
 	return
 
-def runge_kutta(f,t0,y0,h,n):
+def runge_kutta(f,y0,t0,h,n):
 	tn = t0
 	yn = y0
 
@@ -116,7 +116,7 @@ def runge_kutta(f,t0,y0,h,n):
 	return
 #######
 # auxiliar methods
-def aux_euler(f, t0, y0, h, n):
+def aux_euler(f, y0, t0, h, n):
 	t = t0
 	y = y0
 	v_Aux.append([y,t]) # da append na tupla para outro metodo utilizar os pontos
@@ -126,7 +126,7 @@ def aux_euler(f, t0, y0, h, n):
 		v_Aux.append([y,t])
 	return
 
-def aux_euler_inverso(f,t0 ,y0 ,h, n):
+def aux_euler_inverso(f, y0 ,t0 ,h, n):
 	t = t0 
 	y = y0 
 	v_Aux.append([y, t])
@@ -137,7 +137,7 @@ def aux_euler_inverso(f,t0 ,y0 ,h, n):
 		v_Aux.append([y,t])
 	return
 
-def aux_euler_aprimorado(f, t0, y0, h, n):
+def aux_euler_aprimorado(f, y0, t0, h, n):
     t = t0
     y = y0
     v_Aux.append([y,t])
@@ -148,10 +148,9 @@ def aux_euler_aprimorado(f, t0, y0, h, n):
 	    v_Aux.append([y,t])
     return
 
-def aux_runge_kutta(f,t0,y0,h,n):
-    yA=y0
-    t=t0
+def aux_runge_kutta(f, y0, t0, h, n):
     y=y0
+    t=t0
     v_Aux.append([y,t])
     for i in range(0,n):
 	    k1 = f_calculate(f, y, t)
@@ -175,16 +174,16 @@ def printInitialPoints(grau):
 def Adams__Bash(metodo, f, y0, t0, h, n, grau):
 	if(metodo == 'adam_bashforth_by_euler'):
 		text_file.write('Metodo Adams Bashforth por Euler\n')
-		aux_euler(f, t0, y0, h, grau-1)
+		aux_euler(f,y0,t0,h,grau-1)
 	elif(metodo == 'adam_bashforth_by_euler_inverso'):
 		text_file.write('Metodo Adams Bashforth por Euler Inverso\n')
-		aux_euler_inverso(f, t0, y0, h, grau-1)
+		aux_euler_inverso(f,y0,t0,h,grau-1)
 	elif(metodo == 'adam_bashforth_by_euler_aprimorado'):
 		text_file.write('Metodo Adams Bashforth por Euler Aprimorado\n')
-		aux_euler_aprimorado(f, t0, y0, h, grau-1)
+		aux_euler_aprimorado(f,y0,t0,h,grau-1)
 	elif(metodo == 'adam_bashforth_by_runge_kutta'):
 		text_file.write('Metodo Adams Bashforth por Runge Kutta\n')
-		aux_runge_kutta(f,t0,y0,h,grau-1)
+		aux_runge_kutta(f,y0,t0,h,grau-1)
 	elif(metodo == 'adam_bashforth'):
 		text_file.write('Metodo Adams Bashforth\n')
 
@@ -208,16 +207,16 @@ def Adams__Bash(metodo, f, y0, t0, h, n, grau):
 def Adams__Multon(metodo, f, y0, t0, h, n, grau):
 	if(metodo == 'adam_multon_by_euler'):
 		text_file.write('Metodo Adams Multon por Euler\n')
-		aux_euler(f, t0, y0, h, grau-2)
+		aux_euler(f,y0,t0,h,grau-2)
 	elif(metodo == 'adam_multon_by_euler_inverso'):
 		text_file.write('Metodo Adams Multon por Euler Inverso\n')
-		aux_euler_inverso(f, t0, y0, h, grau-2)	
+		aux_euler_inverso(f,y0,t0,h,grau-2)	
 	elif(metodo == 'adam_multon_by_euler_aprimorado'):
 		text_file.write('Metodo Adams Multon por Euler Aprimorado\n')
-		aux_euler_aprimorado(f, t0, y0, h, grau-2)
+		aux_euler_aprimorado(f,y0,t0,h,grau-2)
 	elif(metodo == 'adam_multon_by_runge_kutta'):
 		text_file.write('Metodo Adams Multon por Runge Kutta\n')
-		aux_runge_kutta(f,t0,y0,h,grau-2)
+		aux_runge_kutta(f,y0,t0,h,grau-2)
 	elif(metodo == 'adam_multon'):
 		text_file.write('Metodo Adams Multon\n')
 
@@ -227,8 +226,8 @@ def Adams__Multon(metodo, f, y0, t0, h, n, grau):
 	yf = v_Aux[grau-2][0]
 	tf = t0 + (grau-2)*h
 	for i in range(grau-2, n):
-		yf = AdamMultonF(yf, f, h, grau, i)
-		v_Aux.append((yf, tf))
+		yf = AdamMultonF(yf,f,h,grau,i)
+		v_Aux.append((yf,tf))
 		vx.append(tf)
 		vy.append(yf)
 		text_file.write("%d %.5f\n" % (int(i+1), float(yf)))
@@ -240,16 +239,16 @@ def Adams__Multon(metodo, f, y0, t0, h, n, grau):
 def FInversa(metodo, f, y0, t0, h, n, grau):
 	if (metodo == 'formula_inversa_by_euler'):
 		text_file.write('Metodo Formula Inversa de Diferenciação por Euler\n')
-		aux_euler(f, t0, y0, h, grau-1)
+		aux_euler(f,y0,t0,h,grau-1)
 	elif (metodo == 'formula_inversa_by_euler_inverso'):
 		text_file.write('Metodo Formula Inversa de Diferenciação por Euler Inverso\n')
-		aux_euler_inverso(f, t0, y0, h, grau-1)	
+		aux_euler_inverso(f,y0,t0,h,grau-1)	
 	elif (metodo == 'formula_inversa_by_euler_aprimorado'):
 		text_file.write('Metodo Formula Inversa de Diferenciação por Euler Aprimorado\n')
-		aux_euler_aprimorado(f, t0, y0, h, grau-1)
+		aux_euler_aprimorado(f,y0,t0,h,grau-1)
 	elif (metodo == 'formula_inversa_by_runge_kutta'):
 		text_file.write('Metodo Formula Inversa de Diferenciação por Runge-Kutta\n')
-		aux_runge_kutta(f,t0,y0,h,grau-1)
+		aux_runge_kutta(f,y0,t0,h,grau-1)
 	elif (metodo == 'formula_inversa'):
 		text_file.write('Formula Inversa\n')
 
@@ -259,7 +258,7 @@ def FInversa(metodo, f, y0, t0, h, n, grau):
 	tf = t0 + (grau-1)*h
 	yf = v_Aux[grau-1][0]
 	for i in range(grau-1, n):
-		yf = FInversaF(yf, f, h, grau, i)
+		yf = FInversaF(yf,f,h,grau,i)
 		tf += h
 		v_Aux.append((yf, tf))
 		vx.append(tf)
@@ -378,32 +377,32 @@ def init(entradas):# function that chooses which method will be called
 
 	if (entradas[0] == 'euler'):
 		f = sympify(entradas[5])
-		t0 = float(entradas[1])
-		y0 = float(entradas[2])
+		y0 = float(entradas[1])
+		t0 = float(entradas[2])
 		h = float(entradas[3])
 		n = int(entradas[4])
-		euler(f,t0,y0,h,n)
+		euler(f,y0,t0,h,n)
 	elif (entradas[0] == 'euler_inverso'):
 		f = sympify(entradas[5])
-		t0 = float(entradas[1])
-		y0 = float(entradas[2])
+		y0 = float(entradas[1])
+		t0 = float(entradas[2])
 		h = float(entradas[3])
 		n = int(entradas[4])
-		euler_inverso(f,t0,y0,h,n)
+		euler_inverso(f,y0,t0,h,n)
 	elif (entradas[0] == 'euler_aprimorado'):
 		f = sympify(entradas[5])
-		t0 = float(entradas[1])
-		y0 = float(entradas[2])
+		y0 = float(entradas[1])
+		t0 = float(entradas[2])
 		h = float(entradas[3])
 		n = int(entradas[4])
-		euler_aprimorado(f,t0,y0,h,n)
+		euler_aprimorado(f,y0,t0,h,n)
 	elif (entradas[0] == 'runge_kutta'):
 		f = sympify(entradas[5])
-		t0 = float(entradas[1])
-		y0 = float(entradas[2])
+		y0 = float(entradas[1])
+		t0 = float(entradas[2])
 		h = float(entradas[3])
 		n = int(entradas[4])
-		runge_kutta(f,t0,y0,h,n)	
+		runge_kutta(f,y0,t0,h,n)	
 	elif (entradas[0] == 'adam_bashforth'):
 		grau = int(entradas[-1])
 		f = sympify(entradas[-2])
@@ -449,8 +448,8 @@ def init(entradas):# function that chooses which method will be called
 			Adams__Bash(entradas[0], f, y0, t0, h, n, grau-1)
 	elif (entradas[0] in adam_b): # se o metodo desejado estiver na lista adam_b entra no if
 		f = sympify(entradas[5])
-		t0 = float(entradas[1])
-		y0 = float(entradas[2])
+		y0 = float(entradas[1])
+		t0 = float(entradas[2])
 		h = float(entradas[3])
 		n = int(entradas[4])
 		grau = int(entradas[6])
@@ -500,8 +499,8 @@ def init(entradas):# function that chooses which method will be called
 			Adams__Multon(entradas[0], f, y0, t0, h, n, grau-1)
 	elif (entradas[0] in adam_m): # se o metodo desejado estiver na lista adam_m entra no if
 		f = sympify(entradas[5])
-		t0 = float(entradas[1])
-		y0 = float(entradas[2])
+		y0 = float(entradas[1])
+		t0 = float(entradas[2])
 		h = float(entradas[3])
 		n = int(entradas[4])
 		grau = int(entradas[6])
@@ -552,8 +551,8 @@ def init(entradas):# function that chooses which method will be called
 			FInversa(entradas[0], f, y0, t0, h, n, grau-1)
 	elif (entradas[0] in formula_inversa): # se o metodo desejado estiver na lista adam_m entra no if
 		f = sympify(entradas[5])
-		t0 = float(entradas[1])
-		y0 = float(entradas[2])
+		y0 = float(entradas[1])
+		t0 = float(entradas[2])
 		h = float(entradas[3])
 		n = int(entradas[4])
 		grau = int(entradas[6])

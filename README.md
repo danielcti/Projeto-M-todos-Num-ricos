@@ -35,12 +35,12 @@ E para indicar que as entradas acabaram deve ter um /// na ultima linha.
 Nos métodos de Euler, Euler Inverso, Euler Aprimorado e Runge Kutta as linhas serão assim:
 
 ```
-nome_do_metodo t0 Y(t0) h(o tamanho do passo) n(número de iterações) (dF(y,t)/dt)
+nome_do_metodo Y(t0) t0 h(o tamanho do passo) n(número de iterações) (dF(y,t)/dt)
 ```
 Nos métodos Adams Bashforth, Adams Multon e Formula de Diferenciação Inversa obtendo os valores iniciais por métodos anteriores as linhas serao assim:
 
 ```
-nome_do_metodo t0 Y(t0) h(o tamanho do passo) n(número de iterações) (dF(y,t)/dt) grau
+nome_do_metodo Y(t0) t0 h(o tamanho do passo) n(número de iterações) (dF(y,t)/dt) grau
 ```
 E nos métodos Adams Bashforth, Adams Multon e Formula de Diferenciação Inversa por lista de valores iniciais as linhas serão assim:
 
